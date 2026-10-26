@@ -107,7 +107,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Freelance",
-    role: { pt: "Consultor de Infraestrutura de TI", en: "IT Infrastructure Consultant" },
+    role: { pt: "Técnico de Manutenção de TI", en: "IT Maintenance Technician" },
     summary: {
       pt: "Manutenção e conserto de computadores, notebooks, celulares e impressoras para clientes residenciais e pequenos negócios, do diagnóstico do problema à solução.",
       en: "Repair and maintenance of computers, laptops, phones and printers for home users and small businesses, from diagnosing the issue to fixing it.",
