@@ -21,7 +21,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         <span>{profile.lastName}</span>
       </h1>
 
-      <div className="grid items-end gap-8 pt-8 md:-mt-[5vw] md:grid-cols-[1fr_minmax(0,26rem)_1fr] md:gap-4 md:pt-0 lg:-mt-20">
+      <div className="grid items-end gap-8 pt-8 md:-mt-[3vw] md:grid-cols-[1fr_minmax(0,26rem)_1fr] md:gap-4 md:pt-0 lg:-mt-10 lg:grid-cols-[1fr_minmax(0,36rem)_1fr]">
         <Reveal className="md:pb-12">
           <p className="text-2xl font-semibold tracking-tight sm:text-3xl">
             {profile.role[locale]}
@@ -32,19 +32,19 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </ButtonLink>
         </Reveal>
 
-        <div className="relative z-10 order-last mx-auto w-[min(80vw,26rem)] mix-blend-multiply md:order-none">
+        <div className="relative z-10 order-last mx-auto w-full max-w-[26rem] mix-blend-multiply md:order-none lg:w-[36rem] lg:max-w-none">
           <Image
             src={profile.photo}
             alt={fullName}
             width={1200}
             height={1429}
             priority
-            sizes="(min-width: 768px) 26rem, 80vw"
+            sizes="(min-width: 1024px) 36rem, (min-width: 768px) 26rem, 90vw"
             className="h-auto w-full grayscale"
           />
         </div>
 
-        <Reveal delay={0.1} className="md:justify-self-end md:pb-12">
+        <Reveal delay={0.1} className="relative z-20 md:justify-self-end md:pb-12">
           <SocialLinks
             socials={socials}
             label={dict.a11y.socialLinks}

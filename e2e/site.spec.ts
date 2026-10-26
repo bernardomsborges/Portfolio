@@ -29,7 +29,7 @@ test.describe("routing & i18n", () => {
 
   test("exposes SEO metadata", async ({ page }) => {
     await page.goto("/en");
-    await expect(page).toHaveTitle(/Software Developer/);
+    await expect(page).toHaveTitle(/Software & Solutions Architect/);
     await expect(page.locator('link[rel="alternate"][hreflang="pt-BR"]')).toHaveAttribute(
       "href",
       /\/pt$/,
