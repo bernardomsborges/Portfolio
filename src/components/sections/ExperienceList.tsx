@@ -7,6 +7,9 @@ import { useState, type PointerEvent } from "react";
 export type ExperienceRow = {
   company: string;
   role: string;
+  summary?: string;
+  /** Translated focus labels shown as tags. */
+  focus: string[];
   period: string;
   image?: string;
 };
@@ -36,14 +39,31 @@ export function ExperienceList({ rows }: { rows: ExperienceRow[] }) {
           <li
             key={`${row.company}-${row.period}`}
             onPointerEnter={(event) => event.pointerType === "mouse" && setActive(index)}
-            className="flex flex-col gap-1 border-b border-line-dark py-5 transition-opacity duration-300 last:border-b-0 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:py-6"
+            className="flex flex-col gap-1 border-b border-line-dark py-5 transition-opacity duration-300 last:border-b-0 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:py-6"
             style={{ opacity: active === null || active === index ? 1 : 0.45 }}
           >
-            <div>
+            <div className="max-w-3xl">
               <p className="font-medium text-paper">{row.company}</p>
               <p className="text-mute-dark">{row.role}</p>
+              {row.summary && (
+                <p className="mt-2 text-sm leading-relaxed text-paper/75">{row.summary}</p>
+              )}
+              {row.focus.length > 0 && (
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {row.focus.map((label) => (
+                    <li
+                      key={label}
+                      className="rounded-full border border-line-dark px-2.5 py-0.5 text-xs text-paper/85"
+                    >
+                      {label}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            <p className="text-sm text-mute-dark sm:text-base sm:text-paper/85">{row.period}</p>
+            <p className="shrink-0 text-sm text-mute-dark sm:text-base sm:text-paper/85">
+              {row.period}
+            </p>
           </li>
         ))}
       </ul>

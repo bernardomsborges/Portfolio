@@ -56,6 +56,12 @@ const en = {
     title: "Experience",
     years: "{n}+ years of experience",
     present: "Now",
+    focus: {
+      tech: "Technology",
+      consulting: "Consulting",
+      management: "Management",
+      education: "Education",
+    },
   },
   contact: {
     title: "Have a project in mind?",

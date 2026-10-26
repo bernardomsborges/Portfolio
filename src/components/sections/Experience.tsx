@@ -12,6 +12,8 @@ export async function Experience({ locale, dict }: { locale: Locale; dict: Dicti
   const rows = experience.map((e) => ({
     company: e.company,
     role: e.role[locale],
+    summary: e.summary?.[locale],
+    focus: e.focus?.map((f) => dict.experience.focus[f]) ?? [],
     period: formatPeriod(e, locale, dict.experience.present),
     image: e.image,
   }));

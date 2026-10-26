@@ -54,6 +54,12 @@ const pt = {
     title: "Experiência",
     years: "{n}+ anos de experiência",
     present: "Atual",
+    focus: {
+      tech: "Tecnologia",
+      consulting: "Consultoria",
+      management: "Gestão",
+      education: "Educação",
+    },
   },
   contact: {
     title: "Tem um projeto em mente?",

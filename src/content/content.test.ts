@@ -41,6 +41,15 @@ describe("content integrity", () => {
     expect(projects.some((p) => p.featured)).toBe(true);
   });
 
+  it("experience summaries are translated in all languages", () => {
+    for (const e of experience) {
+      if (!e.summary) continue;
+      for (const locale of locales) {
+        expect(e.summary[locale], `${e.company}.summary.${locale}`).toBeTruthy();
+      }
+    }
+  });
+
   it("experience dates are valid and ordered", () => {
     for (const e of experience) {
       expect(e.start).toMatch(/^\d{4}-(0[1-9]|1[0-2])$/);

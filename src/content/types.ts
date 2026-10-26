@@ -31,9 +31,15 @@ export type Service = {
 /** "YYYY-MM" */
 export type YearMonth = `${number}-${number}`;
 
+export type ExperienceFocus = "tech" | "consulting" | "management" | "education";
+
 export type Experience = {
   company: string;
   role: Localized;
+  /** One or two sentences on what the role delivered. */
+  summary?: Localized;
+  /** Shown as tags next to the role. */
+  focus?: ExperienceFocus[];
   start: YearMonth;
   /** Omit for the current position. */
   end?: YearMonth;
