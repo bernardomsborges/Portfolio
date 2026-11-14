@@ -4,6 +4,7 @@ import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import { useState, type ReactNode } from "react";
 import type { Project } from "@/content/types";
 import type { Locale } from "@/i18n/config";
+import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import { filterProjects, format, type ProjectFilter } from "@/lib/portfolio";
 import { ProjectCard } from "./ProjectCard";
@@ -33,7 +34,7 @@ export function ProjectBrowser({ projects, locale, labels, action }: ProjectBrow
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <Reveal from="down" className="flex flex-wrap items-center justify-between gap-4">
         <div role="group" aria-label={labels.filterLabel} className="flex flex-wrap gap-1">
           {filterOrder.map((value) => (
             <button
@@ -51,7 +52,7 @@ export function ProjectBrowser({ projects, locale, labels, action }: ProjectBrow
           ))}
         </div>
         {action}
-      </div>
+      </Reveal>
 
       <p aria-live="polite" className="sr-only">
         {format(labels.results, { n: visible.length })}
@@ -71,12 +72,19 @@ export function ProjectBrowser({ projects, locale, labels, action }: ProjectBrow
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               >
-                <ProjectCard
-                  project={project}
-                  locale={locale}
-                  priority={index < 2}
-                  labels={{ real: labels.filters.real, open: labels.open }}
-                />
+                {/* Cards come in from alternating sides, matching the two-column grid. */}
+                <Reveal
+                  from={index % 2 === 0 ? "left" : "right"}
+                  delay={(index % 2) * 0.1}
+                  className="h-full"
+                >
+                  <ProjectCard
+                    project={project}
+                    locale={locale}
+                    priority={index < 2}
+                    labels={{ real: labels.filters.real, open: labels.open }}
+                  />
+                </Reveal>
               </motion.li>
             ))}
           </AnimatePresence>

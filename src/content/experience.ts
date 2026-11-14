@@ -19,8 +19,8 @@ export const experience: Experience[] = [
     company: "EloGroup",
     role: { pt: "Consultor", en: "Consultant" },
     summary: {
-      pt: "Consultoria em transformação digital para setor público, Judiciário e agências federais: redesenho de processos (BPMN AS-IS/TO-BE), engenharia de requisitos, modelagem de dados e homologação em Sydle, fazendo a ponte entre alta gestão, áreas de negócio e squads de tecnologia.",
-      en: "Digital transformation consulting for the public sector, the Judiciary and federal agencies: process redesign (BPMN AS-IS/TO-BE), requirements engineering, data modeling and UAT on Sydle, bridging senior leadership, business areas and tech squads.",
+      pt: "Consultor de transformação digital para setor público, Judiciário e agências federais: resposável pelo redesenho de processos (utilizando a metodologia BPMN AS-IS/TO-BE), em conjunto com engenharia de requisitos e modelagem de dados. Trabalhando com ritos de homologação em Sydle, realizando a ponte entre steakholders de negócio e squads de tecnologia.",
+      en: "Digital transformation consulting for the public sector, the Judiciary and federal agencies: process redesign (BPMN AS-IS/TO-BE), requirements engineering, data modeling and UAT on Sydle, bridging business steakholders and tech squads.",
     },
     focus: ["consulting", "tech", "management"],
     start: "2025-10",
@@ -104,16 +104,5 @@ export const experience: Experience[] = [
     },
     start: "2021-02",
     end: "2022-01",
-  },
-  {
-    company: "Freelance",
-    role: { pt: "Técnico de Manutenção de TI", en: "IT Maintenance Technician" },
-    summary: {
-      pt: "Manutenção e conserto de computadores, notebooks, celulares e impressoras para clientes residenciais e pequenos negócios, do diagnóstico do problema à solução.",
-      en: "Repair and maintenance of computers, laptops, phones and printers for home users and small businesses, from diagnosing the issue to fixing it.",
-    },
-    focus: ["tech"],
-    start: "2015-01",
-    end: "2022-12",
   },
 ];

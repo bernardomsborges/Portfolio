@@ -1,4 +1,5 @@
 import { Frame } from "@/components/ui/Frame";
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { experience } from "@/content/experience";
 import type { Locale } from "@/i18n/config";
@@ -25,16 +26,18 @@ export async function Experience({ locale, dict }: { locale: Locale; dict: Dicti
       aria-labelledby="experience-title"
       className="px-5 pt-16 pb-8 sm:px-10 md:pt-24 lg:px-16"
     >
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <SectionTitle
-          id="experience-title"
-          title={dict.experience.title}
-          ghost={dict.experience.ghost}
-          tone="light"
-          className="flex-1"
-        />
-        <p className="relative text-paper/85">{format(dict.experience.years, { n: years })}</p>
-      </div>
+      <SectionTitle
+        id="experience-title"
+        title={dict.experience.title}
+        ghost={dict.experience.ghost}
+        ghostAlign="center"
+        tone="light"
+        aside={
+          <Reveal as="p" from="right" delay={0.2} className="text-paper/85">
+            {format(dict.experience.years, { n: years })}
+          </Reveal>
+        }
+      />
       <div className="mt-10 md:mt-12">
         <ExperienceList rows={rows} />
       </div>

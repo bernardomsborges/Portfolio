@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { IntroScript } from "@/components/ui/IntroScript";
+import { Preloader } from "@/components/ui/Preloader";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Sky } from "@/components/ui/Sky";
 import { profile } from "@/content/profile";
 import { locales, localeTags } from "@/i18n/config";
@@ -47,8 +50,15 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
   const dict = await getDictionary(locale);
 
   return (
-    <html lang={localeTags[locale]} className={fontVariables}>
+    // The intro script sets data-* attributes on <html> before hydration.
+    <html
+      lang={localeTags[locale]}
+      className={fontVariables}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <body id="top">
+        <IntroScript />
         <a
           href="#content"
           className="sr-only z-50 rounded-full bg-ink px-4 py-2 text-paper focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
@@ -56,6 +66,12 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
           {dict.a11y.skipToContent}
         </a>
         <Sky />
+        <ScrollProgress />
+        <Preloader
+          name={`${profile.firstName} ${profile.lastName}`}
+          role={profile.role[locale]}
+          label={dict.preloader.loading}
+        />
         <Header locale={locale} dict={dict} />
         {children}
         <Footer dict={dict} />

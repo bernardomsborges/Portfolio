@@ -23,6 +23,7 @@ const en = {
     contact: "Contact",
     cta: "Let's talk",
   },
+  preloader: { loading: "Loading" },
   hero: {
     cta: "Let's collaborate",
   },

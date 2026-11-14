@@ -3,6 +3,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { SelectedWork } from "@/components/sections/SelectedWork";
 import { Services } from "@/components/sections/Services";
+import { Reveal } from "@/components/ui/Reveal";
 import { profile } from "@/content/profile";
 import { socials } from "@/content/socials";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
@@ -32,10 +33,16 @@ export default async function HomePage() {
         }}
       />
       <Hero locale={locale} dict={dict} />
-      <SelectedWork locale={locale} dict={dict} />
+      <Reveal from="card" duration={1}>
+        <SelectedWork locale={locale} dict={dict} />
+      </Reveal>
       <Services locale={locale} dict={dict} />
-      <Experience locale={locale} dict={dict} />
-      <Contact dict={dict} />
+      <Reveal from="card" duration={1}>
+        <Experience locale={locale} dict={dict} />
+      </Reveal>
+      <Reveal from="card" duration={1}>
+        <Contact dict={dict} />
+      </Reveal>
     </main>
   );
 }

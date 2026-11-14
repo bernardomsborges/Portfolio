@@ -4,6 +4,7 @@ import { ArrowUpRight, X } from "lucide-react";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import Image from "next/image";
 import { useId, useState } from "react";
+import { revealEase } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 
 export type AccordionItem = { id: string; title: string; description: string; image: string };
@@ -16,14 +17,19 @@ export function ServicesAccordion({ items }: { items: AccordionItem[] }) {
   return (
     <MotionConfig reducedMotion="user">
       <ul className="border-t border-ink/15">
-        {items.map((item) => {
+        {items.map((item, index) => {
           const open = item.id === openId;
           const buttonId = `${baseId}-${item.id}-button`;
           const panelId = `${baseId}-${item.id}-panel`;
 
           return (
-            <li
+            // Rows slide in from the left one after another, like a list being dealt out.
+            <motion.li
               key={item.id}
+              initial={{ opacity: 0, x: -80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: revealEase }}
               className={cn(
                 "relative border-b border-ink/15 transition-colors duration-500",
                 open && "rounded-xl border-transparent bg-ink text-paper shadow-frame",
@@ -80,7 +86,7 @@ export function ServicesAccordion({ items }: { items: AccordionItem[] }) {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </li>
+            </motion.li>
           );
         })}
       </ul>

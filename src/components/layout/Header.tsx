@@ -26,7 +26,7 @@ export async function Header({ locale, dict }: { locale: Locale; dict: Dictionar
 
   return (
     <header className="sticky top-3 z-40 px-4 sm:top-4 sm:px-6">
-      <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full bg-paper/85 py-2 pr-2 pl-2 shadow-pill ring-1 ring-line backdrop-blur-md sm:pl-3">
+      <div className="intro-down relative mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full bg-paper/85 py-2 pr-2 pl-2 shadow-pill ring-1 ring-line backdrop-blur-md sm:pl-3">
         <Link
           href={home}
           className="rounded-full"

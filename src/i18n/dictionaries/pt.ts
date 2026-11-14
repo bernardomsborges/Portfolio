@@ -21,6 +21,7 @@ const pt = {
     contact: "Contato",
     cta: "Vamos conversar",
   },
+  preloader: { loading: "Carregando" },
   hero: {
     cta: "Vamos colaborar",
   },

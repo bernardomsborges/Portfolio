@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Pill } from "@/components/ui/Pill";
+import { Reveal } from "@/components/ui/Reveal";
 import type { Project } from "@/content/types";
 import type { Locale } from "@/i18n/config";
 
@@ -18,14 +19,16 @@ export function ProjectCard({ project, locale, labels, priority }: ProjectCardPr
   return (
     <article className="group relative flex h-full flex-col rounded-2xl bg-paper p-2.5 shadow-[0_20px_50px_-30px_rgb(0_0_0/0.35)] ring-1 ring-line transition duration-300 hover:-translate-y-1">
       <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-mist">
-        <Image
-          src={project.cover}
-          alt=""
-          fill
-          priority={priority}
-          sizes="(min-width: 1024px) 540px, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
-        />
+        <Reveal from="zoom" duration={1.6} className="absolute inset-0">
+          <Image
+            src={project.cover}
+            alt=""
+            fill
+            priority={priority}
+            sizes="(min-width: 1024px) 540px, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+          />
+        </Reveal>
         {project.category === "real" && (
           <span className="absolute top-3 left-3 rounded-full bg-paper/90 px-3 py-1 text-[0.7rem] font-semibold tracking-wide uppercase backdrop-blur">
             {labels.real}
