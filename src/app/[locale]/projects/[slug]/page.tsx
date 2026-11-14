@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Frame } from "@/components/ui/Frame";
 import { Pill } from "@/components/ui/Pill";
@@ -32,7 +33,37 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectPage({ params }: PageProps<"/[locale]/projects/[slug]">) {
+type ProjectParams = PageProps<"/[locale]/projects/[slug]">["params"];
+
+/**
+ * The page itself never reads `params`: the URL-specific content streams in behind
+ * Suspense, so the shell shared by every project link stays URL-independent and
+ * client navigations between projects can render instantly.
+ */
+export default function ProjectPage({ params }: PageProps<"/[locale]/projects/[slug]">) {
+  return (
+    <main id="content" className="flex flex-col gap-6 px-4 pt-6 sm:px-6">
+      <Suspense fallback={<ProjectSkeleton />}>
+        <ProjectContent params={params} />
+      </Suspense>
+    </main>
+  );
+}
+
+function ProjectSkeleton() {
+  return (
+    <Frame aria-busy="true" className="px-5 py-10 sm:px-10 lg:px-16 lg:py-14">
+      <div className="animate-pulse space-y-6">
+        <div className="h-4 w-32 rounded-full bg-mist" />
+        <div className="h-12 w-3/4 rounded-xl bg-mist sm:h-16" />
+        <div className="h-5 w-2/3 rounded-full bg-mist" />
+        <div className="mt-10 aspect-[16/10] rounded-2xl bg-mist" />
+      </div>
+    </Frame>
+  );
+}
+
+async function ProjectContent({ params }: { params: ProjectParams }) {
   const { slug } = await params;
   const locale = await getLocale();
   const dict = await getDictionary(locale);
@@ -47,7 +78,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
   ];
 
   return (
-    <main id="content" className="flex flex-col gap-6 px-4 pt-6 sm:px-6">
+    <>
       <Frame
         as="article"
         aria-labelledby="project-title"
@@ -172,6 +203,6 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
           </Link>
         </Frame>
       )}
-    </main>
+    </>
   );
 }
