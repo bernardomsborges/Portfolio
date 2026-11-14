@@ -53,7 +53,9 @@ test.describe("home page", () => {
   test("filters selected work", async ({ page }) => {
     const work = page.locator("#work");
     await work.getByRole("button", { name: "Real project" }).click();
-    await expect(work.getByRole("article")).toHaveCount(2);
+    await expect(work.getByRole("article")).toHaveCount(3);
+    await work.getByRole("button", { name: "Exploration" }).click();
+    await expect(work.getByRole("article")).toHaveCount(1);
     await work.getByRole("button", { name: "All" }).click();
     await expect(work.getByRole("article")).toHaveCount(4);
   });
@@ -68,9 +70,12 @@ test.describe("home page", () => {
   });
 
   test("opens a project and switches language on the same page", async ({ page }) => {
-    await page.locator("#work").getByRole("link", { name: /Atlas/ }).click();
-    await expect(page).toHaveURL(/\/en\/projects\/atlas$/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Analytics Dashboard");
+    await page
+      .locator("#work")
+      .getByRole("link", { name: /Observatory/ })
+      .click();
+    await expect(page).toHaveURL(/\/en\/projects\/observatorio$/);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Privacy-first AI triage");
 
     const menu = page.getByRole("button", { name: "Open menu" });
     if (await menu.isVisible()) await menu.click();
@@ -78,8 +83,8 @@ test.describe("home page", () => {
       .getByRole("navigation", { name: "Switch language" })
       .getByRole("link", { name: "pt" })
       .click();
-    await expect(page).toHaveURL(/\/pt\/projects\/atlas$/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Dashboard de Analytics");
+    await expect(page).toHaveURL(/\/pt\/projects\/observatorio$/);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Triagem de manifestações");
   });
 
   test("has no horizontal overflow", async ({ page }) => {
