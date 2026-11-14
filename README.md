@@ -39,6 +39,20 @@ ficam em `src/i18n/dictionaries/` — o TypeScript garante que `en.ts` tenha as 
 Imagens ficam em `public/`. Capas de projeto: 1600×1000 (16:10). Os testes verificam se toda imagem
 referenciada existe e se todo projeto está traduzido.
 
+## Docker
+
+O build usa a saída `standalone` do Next.js: a imagem final leva só o servidor, `public/` e
+`.next/static`, e roda com um usuário sem privilégios.
+
+```bash
+docker build --build-arg NEXT_PUBLIC_SITE_URL=https://seu-dominio.com -t portfolio .
+docker run -p 3000:3000 portfolio
+```
+
+`NEXT_PUBLIC_SITE_URL` entra no build (URLs canônicas, sitemap e Open Graph), por isso é um
+`--build-arg`, e não uma variável do `docker run`. A porta interna é `3000` (`PORT` muda isso) e o
+healthcheck consulta `/pt`.
+
 ## Estrutura
 
 ```

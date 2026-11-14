@@ -1,0 +1,13 @@
+.git
+.next
+node_modules
+npm-debug.log*
+test-results
+playwright-report
+blob-report
+coverage
+*.tsbuildinfo
+.env*
+!.env.example
+Dockerfile
+.dockerignore
