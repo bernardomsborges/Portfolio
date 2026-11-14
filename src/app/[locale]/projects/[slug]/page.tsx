@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ui/Button";
 import { Frame } from "@/components/ui/Frame";
 import { Pill } from "@/components/ui/Pill";
+import { CaseStudyHighlights, CaseStudySections } from "@/components/work/CaseStudy";
 import { projects } from "@/content/projects";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
 import { findProject, nextProject } from "@/lib/portfolio";
@@ -107,6 +108,14 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
           />
         </div>
 
+        {project.highlights && (
+          <CaseStudyHighlights
+            items={project.highlights}
+            locale={locale}
+            label={dict.project.highlights}
+          />
+        )}
+
         <div className="mt-12 grid gap-10 lg:grid-cols-[16rem_1fr]">
           <dl className="grid content-start gap-5 sm:grid-cols-3 lg:grid-cols-1">
             {meta.map((item) => (
@@ -134,6 +143,14 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
             ))}
           </div>
         </div>
+
+        {project.sections && (
+          <CaseStudySections
+            sections={project.sections}
+            locale={locale}
+            labels={{ excerpt: dict.project.excerpt }}
+          />
+        )}
       </Frame>
 
       {next && (

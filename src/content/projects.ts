@@ -1,7 +1,9 @@
+import { communitySplit } from "./case-studies/community-split";
 import type { Project } from "./types";
 
-// TODO: replace with your real projects. Covers live in /public/projects.
+// TODO: replace the remaining placeholders with real projects. Covers live in /public/projects.
 export const projects: Project[] = [
+  communitySplit,
   {
     slug: "atlas",
     title: { pt: "Atlas — Dashboard de Analytics", en: "Atlas — Analytics Dashboard" },
@@ -51,7 +53,6 @@ export const projects: Project[] = [
     role: { pt: "Front-end", en: "Front-end" },
     client: "Studio Exemplo",
     cover: "/projects/lumen.svg",
-    featured: true,
   },
   {
     slug: "orbit",

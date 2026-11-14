@@ -21,6 +21,9 @@ describe("content integrity", () => {
       profile.photo,
       profile.avatar,
       ...projects.map((p) => p.cover),
+      ...projects
+        .flatMap((p) => p.sections ?? [])
+        .flatMap((s) => (s.shots ?? []).map((i) => i.src)),
       ...services.map((s) => s.image),
       ...experience.flatMap((e) => (e.image ? [e.image] : [])),
     ];
@@ -33,6 +36,29 @@ describe("content integrity", () => {
         expect(p.title[locale], `${p.slug}.title.${locale}`).toBeTruthy();
         expect(p.summary[locale], `${p.slug}.summary.${locale}`).toBeTruthy();
         expect(p.body[locale].length, `${p.slug}.body.${locale}`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("case-study sections have unique anchors and are translated in all languages", () => {
+    for (const p of projects) {
+      const sections = p.sections ?? [];
+      const ids = sections.map((s) => s.id);
+      expect(new Set(ids).size, `${p.slug} section ids`).toBe(ids.length);
+      for (const s of sections) {
+        expect(s.id).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+        for (const locale of locales) {
+          const where = `${p.slug}#${s.id}.${locale}`;
+          expect(s.title[locale], where).toBeTruthy();
+          expect(s.body[locale].length, where).toBeGreaterThan(0);
+          if (s.points) expect(s.points[locale].length, where).toBe(s.points.pt.length);
+          for (const shot of s.shots ?? []) {
+            expect(shot.alt[locale], `${where} ${shot.src}`).toBeTruthy();
+          }
+        }
+      }
+      for (const h of p.highlights ?? []) {
+        for (const locale of locales) expect(h.label[locale], `${p.slug} highlight`).toBeTruthy();
       }
     }
   });

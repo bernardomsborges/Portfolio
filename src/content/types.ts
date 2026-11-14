@@ -2,6 +2,39 @@ import type { Localized } from "@/i18n/config";
 
 export type ProjectCategory = "real" | "exploration";
 
+/** A screenshot shown inside a case-study section. */
+export type ProjectShot = {
+  /** Path inside /public. */
+  src: string;
+  width: number;
+  height: number;
+  alt: Localized;
+  caption?: Localized;
+};
+
+/** A short code excerpt that illustrates a technical point. */
+export type ProjectCode = {
+  /** Where the excerpt comes from, e.g. "backend/src/domain/finance.ts". */
+  file: string;
+  language: string;
+  source: string;
+};
+
+/** One chapter of a case study, rendered after the intro paragraphs. */
+export type ProjectSection = {
+  /** URL-safe anchor, unique within the project. */
+  id: string;
+  title: Localized;
+  body: Localized<string[]>;
+  /** Bullet list rendered after the paragraphs (rules, steps, decisions). */
+  points?: Localized<string[]>;
+  code?: ProjectCode;
+  shots?: ProjectShot[];
+};
+
+/** A headline number shown above the case study, e.g. "N−1" / "Pix per settlement". */
+export type ProjectHighlight = { value: string; label: Localized };
+
 export type Project = {
   slug: string;
   title: Localized;
@@ -19,6 +52,9 @@ export type Project = {
   links?: { live?: string; repo?: string };
   /** Shown in the home "Selected work" section. */
   featured?: boolean;
+  highlights?: ProjectHighlight[];
+  /** Case-study chapters. Projects without them show only `body`. */
+  sections?: ProjectSection[];
 };
 
 export type Service = {

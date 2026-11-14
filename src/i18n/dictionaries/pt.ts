@@ -46,6 +46,8 @@ const pt = {
     live: "Ver online",
     repo: "Código-fonte",
     next: "Próximo projeto",
+    highlights: "Destaques do projeto",
+    excerpt: "Trecho de código de",
   },
   services: {
     title: "Serviços",

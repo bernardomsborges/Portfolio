@@ -48,6 +48,8 @@ const en = {
     live: "View live",
     repo: "Source code",
     next: "Next project",
+    highlights: "Project highlights",
+    excerpt: "Code excerpt from",
   },
   services: {
     title: "Services",
